@@ -1,4 +1,6 @@
 import React from "react";
+import useToggle from "./hooks/toggleState";
+import EditForm from "./editForm";
 import { ListItem, 
         ListItemText, 
         Checkbox, 
@@ -7,9 +9,17 @@ import { ListItem,
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-function Todo({task, completed, removeTodo, id, toggleTodo}){
+function Todo({task, completed, removeTodo, id, toggleTodo, editTodo}){
+    const [editing, toggle] = useToggle();
     return (
         <ListItem>
+            {editing ? 
+            <EditForm 
+                editTodo={editTodo} 
+                id={id} 
+                task={task} 
+                toggle={toggle}/> :
+            <>
             <Checkbox 
                 tabIndex={-1} 
                 checked={completed}
@@ -26,10 +36,13 @@ function Todo({task, completed, removeTodo, id, toggleTodo}){
                 </IconButton>
                 <IconButton 
                     aria-label="Edit"
+                    onClick={toggle}
                     >
                     <EditIcon/>
                 </IconButton>
             </ListItemSecondaryAction>
+            </>
+            }
         </ListItem>
     )
 }
