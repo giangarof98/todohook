@@ -12,7 +12,7 @@ import EditIcon from '@mui/icons-material/Edit';
 function Todo({task, completed, removeTodo, id, toggleTodo, editTodo}){
     const [editing, toggle] = useToggle();
     return (
-        <ListItem>
+        <ListItem style={{height: '64px'}}>
             {editing ? 
             <EditForm 
                 editTodo={editTodo} 
